@@ -5,9 +5,10 @@
 ## 1. Build
 
 ```shell
-DOCKER_BUILDKIT=1 docker build --no-cache 
--t <IMAGE_NAME>:<TAG_NAME> .\
---build-ARG BASEIMAGE=Ubuntu:20.24
+DOCKER_BUILDKIT=1 docker build --no-cache \
+--build-ARG BASEIMAGE=ubuntu \
+--build-ARG BASEIMAGE=20.04 \
+-t <IMAGE_NAME>:<TAG_NAME> .
 ```
 
 ## 2. Run Container
