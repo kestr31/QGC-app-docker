@@ -6,8 +6,8 @@
 
 ```shell
 DOCKER_BUILDKIT=1 docker build --no-cache \
---build-ARG BASEIMAGE=ubuntu \
---build-ARG BASEIMAGE=20.04 \
+--build-arg BASEIMAGE=ubuntu \
+--build-arg BASETAG=20.04 \
 -t <IMAGE_NAME>:<TAG_NAME> .
 ```
 
