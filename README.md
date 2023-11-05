@@ -38,6 +38,7 @@ docker run -it --rm \
    -e DISPLAY=${DISPLAY} \
    -e QT_NO_MITSHM=1 \
    -e XDG_RUNTIME_DIR=${XDG_RUNTIME_DIR} \
+   -e HEADLESS=0 \
    -v /tmp/.X11-unix:/tmp/.X11-unix \
    --device=/dev/dri:/dev/dri \
    --privileged \
@@ -65,6 +66,7 @@ docker run -it --rm \
    -e QT_NO_MITSHM=1 \
    -e XDG_RUNTIME_DIR=${XDG_RUNTIME_DIR} \
    -e LD_LIBRARY_PATH=/usr/lib/wsl/lib \
+   -e HEADLESS=0 \
    -v /tmp/.X11-unix:/tmp/.X11-unix \
    -v /mnt/wslg:/mnt/wslg \
    -v /usr/lib/wsl:/usr/lib/wsl \
@@ -92,6 +94,7 @@ services:
       DISPLAY:          :0
       QT_NO_MITSHM:     1
       XDG_RUNTIME_DIR:  /run/user/1000
+      HEADLESS:         0
     volumes:
       - ${X11_SOCKET_DIR}:/tmp/.X11-unix
     devices:
@@ -106,6 +109,8 @@ services:
 
 ## 4. Additional Tips
 
+### 4.1. Remove Background Map
+
 - If you add following lines in `QGroundControl.ini`, you can remove background map from QGC:
 
 ```
@@ -113,3 +118,8 @@ services:
 mapProvider=CustomURL
 mapType=Custom
 ```
+
+### 4.2 Running in Headless Mode
+
+- The container contains `xvfb`. Which is: it can be run on headless mode.
+- In order to use this feature, set `HEADLESS` environment variable as `1`.

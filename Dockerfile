@@ -94,12 +94,23 @@ RUN \
 USER user
 WORKDIR /home/user
 
-ENTRYPOINT ["/bin/bash","-l","-c","/home/user/QGroundControl.AppImage"]
+# ENTRYPOINT SCRIPT
+# SET PERMISSION SO THAT USER CAN EDIT INSIDE THE CONTAINER
+COPY --chown=user:user \
+    entrypoint.sh /usr/local/bin/entrypoint.sh
+
+# CREATE SYMBOLIC LINK FOR QUICK ACCESS
+RUN \
+    mkdir /home/user/scripts \
+    && ln -s /usr/local/bin/entrypoint.sh /home/user/scripts/entrypoint.sh
+
+ENTRYPOINT [ "/usr/local/bin/entrypoint.sh" ]
 
 # docker run -it --rm \
 #    -e DISPLAY=$DISPLAY \
 #    -e QT_NO_MITSHM=1 \
 #    -e XDG_RUNTIME_DIR=${XDG_RUNTIME_DIR} \
+#    -e HEADLESS=0 \
 #    -v /tmp/.X11-unix:/tmp/.X11-unix \
 #    --net host \
 #    --device=/dev/dri:/dev/dri \
