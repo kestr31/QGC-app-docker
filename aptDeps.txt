@@ -10,6 +10,7 @@ libgl1-mesa-glx
 libgstreamer-plugins-base1.0-dev
 libqt5gui5
 libsdl2-dev
+locales
 mesa-utils
 wget
 x-window-system

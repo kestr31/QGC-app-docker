@@ -87,9 +87,11 @@ RUN \
 COPY config /home/user/.config/QGroundControl.org
 
 RUN \
-    wget -P /home/user https://d176tv9ibo4jno.cloudfront.net/latest/QGroundControl.AppImage \
+    wget -P /home/user https://github.com/mavlink/qgroundcontrol/releases/download/v4.4.0/QGroundControl.AppImage \
     && chmod +x /home/user/QGroundControl.AppImage \
-    && chown -R user:user /home/user
+    && chown -R user:user /home/user \
+    && locale-gen en_US.UTF-8 \
+    && update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
 
 USER user
 WORKDIR /home/user
@@ -115,10 +117,10 @@ ENTRYPOINT [ "/usr/local/bin/entrypoint.sh" ]
 #    --net host \
 #    --device=/dev/dri:/dev/dri \
 #    --privileged \
-#    kestr3l/qgc-app:4.2.9
+#    kestr3l/qgc-app:4.4.0
 
 # DOCKER_BUILDKIT=1 docker build \
 # --build-arg BASEIMAGE=ubuntu \
 # --build-arg BASETAG=22.04 \
-# -t kestr3l/qgc-app:4.2.9 \
+# -t kestr3l/qgc-app:4.4.0 \
 # -f ./Dockerfile .
