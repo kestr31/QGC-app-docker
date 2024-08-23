@@ -1,8 +1,8 @@
-ARG BASEIMAGE=ubuntu
-ARG BASETAG=22.04
+ARG BASE_NAME=ubuntu
+ARG BASE_TAG=22.04
 
 # BASE STAGE FOR CACHINE APT PACKAGE LISTS
-FROM ${BASEIMAGE}:${BASETAG} AS stage_apt
+FROM ${BASE_NAME}:${BASE_TAG} AS stage_apt
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
@@ -28,7 +28,7 @@ RUN \
     add-apt-repository ppa:kisak/kisak-mesa -y
 
 
-FROM ${BASEIMAGE}:${BASETAG} AS stage_final
+FROM ${BASE_NAME}:${BASE_TAG} AS stage_final
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
@@ -106,7 +106,7 @@ ENTRYPOINT [ "/usr/local/bin/entrypoint.sh" ]
 #    kestr3l/qgc-app:4.4.0
 
 # DOCKER_BUILDKIT=1 docker build \
-# --build-arg BASEIMAGE=ubuntu \
-# --build-arg BASETAG=22.04 \
+# --build-arg BASE_NAME=ubuntu \
+# --build-arg BASE_TAG=22.04 \
 # -t kestr3l/qgc-app:4.4.0 \
 # -f ./Dockerfile .
