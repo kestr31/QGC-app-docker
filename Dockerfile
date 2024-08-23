@@ -1,15 +1,8 @@
-ARG BASEIMAGE
-ARG BASETAG
-
-#          __                                     __ 
-#    _____/ /_____ _____ ____        ____ _____  / /_
-#   / ___/ __/ __ `/ __ `/ _ \______/ __ `/ __ \/ __/
-#  (__  ) /_/ /_/ / /_/ /  __/_____/ /_/ / /_/ / /_  
-# /____/\__/\__,_/\__, /\___/      \__,_/ .___/\__/  
-#                /____/                /_/           
+ARG BASEIMAGE=ubuntu
+ARG BASETAG=22.04
 
 # BASE STAGE FOR CACHINE APT PACKAGE LISTS
-FROM ${BASEIMAGE}:${BASETAG} as stage_apt
+FROM ${BASEIMAGE}:${BASETAG} AS stage_apt
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
@@ -35,14 +28,7 @@ RUN \
     add-apt-repository ppa:kisak/kisak-mesa -y
 
 
-#          __                         _____             __
-#    _____/ /_____ _____ ____        / __(_)___  ____ _/ /
-#   / ___/ __/ __ `/ __ `/ _ \______/ /_/ / __ \/ __ `/ / 
-#  (__  ) /_/ /_/ / /_/ /  __/_____/ __/ / / / / /_/ / /  
-# /____/\__/\__,_/\__, /\___/     /_/ /_/_/ /_/\__,_/_/   
-#                /____/                                   
-
-FROM ${BASEIMAGE}:${BASETAG} as stage_final
+FROM ${BASEIMAGE}:${BASETAG} AS stage_final
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
